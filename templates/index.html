@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Dark Theme Background and Text */
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: #ddd;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styling */
+        header {
+            background-color: #222;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        header h1 {
+            color: #00bfa5;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #00bfa5;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bfa5;
+        }
+
+        nav a:hover::after {
+            transform: translateX(0);
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .content h2 {
+            font-size: 3.5rem;
+            color: #00bfa5;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideIn 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .content p {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideIn 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .predict-btn {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            background-color: #00bfa5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 191, 165, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: inline-block; /* Ensures the button behaves like a button */
+            text-decoration: none; /* Removes underline from link */
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 191, 165, 0.7);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        section h2 {
+            color: #00bfa5;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: bounceIn 0.8s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        section p {
+            color: #ccc;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: bounceIn 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <h1>HealthCare Center</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="content">
+            <h2>Diabetes Prediction System</h2>
+            <p>Empowering you with early detection for better health.</p>
+            <a href="/predict" class="predict-btn">Predict Diabetes</a>
+        </div>
+    </section>
+
+    <!-- Additional Sections -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>Providing expert care and early diagnostics to keep you on a path to better health.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Reach out for consultations and support. We're here to assist you every step of the way.</p>
+    </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Learn more about our mission to make healthcare accessible, affordable, and effective for everyone.</p>
+    </section>
+</body>
+</html>

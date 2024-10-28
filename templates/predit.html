@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction - User Input</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Dark Theme Background and Text */
+        body {
+            background: linear-gradient(135deg, #1e1e1e, #2e2e2e);
+            color: #ddd;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styling */
+        header {
+            background-color: #222;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.5s;
+        }
+
+        header h1 {
+            color: #00bfa5;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #00bfa5;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bfa5;
+        }
+
+        nav a:hover::after {
+            transform: translateX(0);
+        }
+
+        /* Form Section Styling */
+        .form-section {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .form-section h2 {
+            color: #00bfa5;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: bounceIn 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .info-heading {
+            color: #ccc;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #ddd;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #00bfa5;
+            outline: none;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            background-color: #00bfa5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 191, 165, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 191, 165, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes formGroupAnimation {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <h1>HealthCare Center</h1>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/predict">Predict</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <h2>Enter Your Data</h2>
+        <p class="info-heading">Please fill in the following information for diabetes prediction:</p>
+        <form action="/predict" method="POST">
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards;">
+                <label for="pregnancies">Pregnancies:</label>
+                <input type="number" id="pregnancies" name="pregnancies" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.1s;">
+                <label for="glucose">Glucose:</label>
+                <input type="number" id="glucose" name="glucose" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.2s;">
+                <label for="bloodPressure">Blood Pressure:</label>
+                <input type="number" id="bloodPressure" name="bloodPressure" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.3s;">
+                <label for="skinThickness">Skin Thickness:</label>
+                <input type="number" id="skinThickness" name="skinThickness" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.4s;">
+                <label for="insulin">Insulin:</label>
+                <input type="number" id="insulin" name="insulin" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.5s;">
+                <label for="bmi">BMI:</label>
+                <input type="number" step="0.01" id="bmi" name="bmi" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.6s;">
+                <label for="diabetesPedigreeFunction">Diabetes Pedigree Function:</label>
+                <input type="number" step="0.01" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" required>
+            </div>
+            <div class="form-group" style="animation: formGroupAnimation 0.5s ease forwards; animation-delay: 0.7s;">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
+</body>
+</html>
